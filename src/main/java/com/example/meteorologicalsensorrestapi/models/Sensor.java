@@ -2,6 +2,8 @@ package com.example.meteorologicalsensorrestapi.models;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "sensor")
@@ -13,6 +15,8 @@ public class Sensor {
     private int id;
 
     @Column(name = "name")
+    @NotEmpty(message = "name must not be empty")
+    @Size(min = 3, max = 30, message = "name must be in the from 3 between 30 characters")
     private String name;
 
     public int getId() {
