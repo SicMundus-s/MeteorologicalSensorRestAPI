@@ -39,13 +39,16 @@ public class SensorsController {
         sensorValidator.validate(convertToSensor(sensorDTO), bindingResult); // Есть ли сенсоры с такими именами в БД
 
         if (bindingResult.hasErrors()) {
-            StringBuilder stringBuilder = new StringBuilder();
-            String[] errors = bindingResult.resolveMessageCodes("400");
-            for(String error : errors) {
-                stringBuilder.append(error);
+            StringBuilder errorsMsg = new StringBuilder();
+            List<FieldError> fieldError = bindingResult.getFieldErrors();
+
+            for(FieldError error : fieldError) {
+                errorsMsg.append("field").
+                        append(error.getField()).
+                        append(": ").append(error.getDefaultMessage()).
+                        append(";");
             }
-            String test = String.valueOf(stringBuilder);
-            throw new SensorNotRegistrationException(test);
+            throw new SensorNotRegistrationException(errorsMsg.toString());
         }
 
         sensorsService.save(convertToSensor(sensorDTO));
@@ -53,8 +56,8 @@ public class SensorsController {
     }
 
     @ExceptionHandler
-    private ResponseEntity<HttpStatus> errorRegistrationSensor(SensorNotRegistrationException e) {
-    
+    private ResponseEntity<String> errorRegistrationSensor(SensorNotRegistrationException errorsMsg) {
+        return new ResponseEntity<>(errorsMsg.getMessage(), HttpStatus.BAD_REQUEST);
     }
     private Sensor convertToSensor(SensorDTO sensorDTO) {
         return modelMapper.map(sensorDTO, Sensor.class);
