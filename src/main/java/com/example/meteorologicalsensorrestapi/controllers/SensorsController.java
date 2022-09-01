@@ -36,6 +36,7 @@ public class SensorsController {
     @PostMapping("/registration")
     public ResponseEntity<HttpStatus> registrationSensor(@RequestBody @Valid SensorDTO sensorDTO, BindingResult bindingResult) {
 
+
         sensorValidator.validate(convertToSensor(sensorDTO), bindingResult); // Есть ли сенсоры с такими именами в БД
 
         if (bindingResult.hasErrors()) {
@@ -43,7 +44,7 @@ public class SensorsController {
             List<FieldError> fieldError = bindingResult.getFieldErrors();
 
             for(FieldError error : fieldError) {
-                errorsMsg.append("field").
+                errorsMsg.append("field ").
                         append(error.getField()).
                         append(": ").append(error.getDefaultMessage()).
                         append(";");
@@ -55,10 +56,6 @@ public class SensorsController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @ExceptionHandler
-    private ResponseEntity<String> errorRegistrationSensor(SensorNotRegistrationException errorsMsg) {
-        return new ResponseEntity<>(errorsMsg.getMessage(), HttpStatus.BAD_REQUEST);
-    }
     private Sensor convertToSensor(SensorDTO sensorDTO) {
         return modelMapper.map(sensorDTO, Sensor.class);
     }
