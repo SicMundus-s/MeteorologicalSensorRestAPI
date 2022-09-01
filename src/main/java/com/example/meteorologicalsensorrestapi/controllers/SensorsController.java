@@ -33,24 +33,14 @@ public class SensorsController {
         this.modelMapper = modelMapper;
     }
 
+    /*
+    Возможна реализация через bindingResult, в таком случае нам нужно передать его в аргументе и с помощью стрингБилдера
+    конкатенировать строки из листа ошибок(FieldError) и выкинуть исключение с сообщением ошибки в ПОЛЯХ.
+    Сейчас ошибки с полей ловятся в ExceptionApiHandler таким образом ответственность за обработку ошибки ложится не на контроллер
+     */
     @PostMapping("/registration")
-    public ResponseEntity<HttpStatus> registrationSensor(@RequestBody @Valid SensorDTO sensorDTO, BindingResult bindingResult) {
+    public ResponseEntity<HttpStatus> registrationSensor(@RequestBody @Valid SensorDTO sensorDTO) {
 
-
-        sensorValidator.validate(convertToSensor(sensorDTO), bindingResult); // Есть ли сенсоры с такими именами в БД
-
-        if (bindingResult.hasErrors()) {
-            StringBuilder errorsMsg = new StringBuilder();
-            List<FieldError> fieldError = bindingResult.getFieldErrors();
-
-            for(FieldError error : fieldError) {
-                errorsMsg.append("field ").
-                        append(error.getField()).
-                        append(": ").append(error.getDefaultMessage()).
-                        append(";");
-            }
-            throw new SensorNotRegistrationException(errorsMsg.toString());
-        }
 
         sensorsService.save(convertToSensor(sensorDTO));
         return ResponseEntity.ok(HttpStatus.OK);

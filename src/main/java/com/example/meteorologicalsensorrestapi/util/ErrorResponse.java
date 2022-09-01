@@ -3,23 +3,24 @@ package com.example.meteorologicalsensorrestapi.util;
 import org.springframework.http.HttpStatus;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class ErrorResponse {
-    private String message;
+    private List<String> errors;
+
     private LocalDateTime timestamp;
 
-    public ErrorResponse(String message, LocalDateTime timestamp) {
-        this.message = message;
+    public ErrorResponse(List<String> errors, LocalDateTime timestamp) {
+        this.errors = errors;
         this.timestamp = timestamp;
     }
 
-
-    public String getMessage() {
-        return message;
+    public List<String> getErrors() {
+        return errors;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setErrors(List<String> errors) {
+        this.errors = errors;
     }
 
     public LocalDateTime getTimestamp() {
