@@ -3,7 +3,6 @@ package com.example.meteorologicalsensorrestapi.service;
 import com.example.meteorologicalsensorrestapi.models.Sensor;
 import com.example.meteorologicalsensorrestapi.repositories.SensorsRepositories;
 import com.example.meteorologicalsensorrestapi.util.SensorNotRegistrationException;
-import com.example.meteorologicalsensorrestapi.util.SensorValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,7 +29,7 @@ public class SensorsService {
                     "This name is already table"
             );
         }
-        // Запись - можно выкидывать ex и проверять (if) каждое поле в сущности. Можно ли проверить сразу все без BingindResult ?
+
         sensorsRepositories.save(sensor);
     }
 

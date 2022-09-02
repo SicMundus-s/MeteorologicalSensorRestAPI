@@ -21,14 +21,12 @@ import java.util.List;
 @RequestMapping("/sensors")
 public class SensorsController {
 
-    private final SensorValidator sensorValidator;
     private final SensorsService sensorsService;
     private final ModelMapper modelMapper;
 
 
     @Autowired
-    public SensorsController(SensorValidator sensorValidator, SensorsService sensorsService, ModelMapper modelMapper) {
-        this.sensorValidator = sensorValidator;
+    public SensorsController(SensorsService sensorsService, ModelMapper modelMapper) {
         this.sensorsService = sensorsService;
         this.modelMapper = modelMapper;
     }
@@ -40,7 +38,6 @@ public class SensorsController {
      */
     @PostMapping("/registration")
     public ResponseEntity<HttpStatus> registrationSensor(@RequestBody @Valid SensorDTO sensorDTO) {
-
 
         sensorsService.save(convertToSensor(sensorDTO));
         return ResponseEntity.ok(HttpStatus.OK);

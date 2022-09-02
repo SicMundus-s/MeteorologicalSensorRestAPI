@@ -1,6 +1,5 @@
 package com.example.meteorologicalsensorrestapi.util;
 
-import org.springframework.http.HttpStatus;
 
 import java.time.LocalDateTime;
 import java.util.List;
