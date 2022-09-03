@@ -3,8 +3,6 @@ package com.example.meteorologicalsensorrestapi.controllers;
 import com.example.meteorologicalsensorrestapi.dto.SensorDTO;
 import com.example.meteorologicalsensorrestapi.models.Sensor;
 import com.example.meteorologicalsensorrestapi.service.SensorsService;
-import com.example.meteorologicalsensorrestapi.util.SensorNotRegistrationException;
-import com.example.meteorologicalsensorrestapi.util.SensorValidator;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,6 +36,7 @@ public class SensorsController {
      */
     @PostMapping("/registration")
     public ResponseEntity<HttpStatus> registrationSensor(@RequestBody @Valid SensorDTO sensorDTO) {
+
 
         sensorsService.save(convertToSensor(sensorDTO));
         return ResponseEntity.ok(HttpStatus.OK);

@@ -4,10 +4,12 @@ package com.example.meteorologicalsensorrestapi.models;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "sensor")
-public class Sensor {
+public class Sensor implements Serializable {
 
     @Id
     @Column(name = "id")
@@ -19,6 +21,8 @@ public class Sensor {
     @Size(min = 3, max = 30, message = "name must be in the from 3 between 30 characters")
     private String name;
 
+    @OneToMany(mappedBy = "owner")
+    private List<Measurement> measurementList;
     public int getId() {
         return id;
     }
@@ -33,5 +37,13 @@ public class Sensor {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Measurement> getMeasurementList() {
+        return measurementList;
+    }
+
+    public void setMeasurementList(List<Measurement> measurementList) {
+        this.measurementList = measurementList;
     }
 }

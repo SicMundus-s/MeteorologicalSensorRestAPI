@@ -24,7 +24,7 @@ public class SensorsService {
     @Transactional
     public void save(Sensor sensor) {
 
-        if(sensorsRepositories.findByName(sensor.getName()).isPresent()) {
+        if (sensorsRepositories.findByName(sensor.getName()).isPresent()) { // isPresent - возвращает true если value != null
             throw new SensorNotRegistrationException(
                     "This name is already table"
             );

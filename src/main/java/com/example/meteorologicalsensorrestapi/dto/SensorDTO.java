@@ -1,5 +1,6 @@
 package com.example.meteorologicalsensorrestapi.dto;
 
+
 import javax.persistence.Column;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -17,4 +18,5 @@ public class SensorDTO {
     public void setName(String name) {
         this.name = name;
     }
+
 }
