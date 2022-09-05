@@ -33,7 +33,7 @@ public class Measurement {
     @ManyToOne
     @JoinColumn(name = "sensor_id", referencedColumnName = "name")
     @NotNull
-    private Sensor owner;
+    private Sensor sensor;
 
     public Measurement() {
 
@@ -77,11 +77,11 @@ public class Measurement {
         this.measurementDateTime = measurementDateTime;
     }
 
-    public Sensor getOwner() {
-        return owner;
+    public Sensor getSensor() {
+        return sensor;
     }
 
-    public void setOwner(Sensor owner) {
-        this.owner = owner;
+    public void setSensor(Sensor sensor) {
+        this.sensor = sensor;
     }
 }

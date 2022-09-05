@@ -21,7 +21,7 @@ public class Sensor implements Serializable {
     @Size(min = 3, max = 30, message = "name must be in the from 3 between 30 characters")
     private String name;
 
-    @OneToMany(mappedBy = "owner")
+    @OneToMany(mappedBy = "sensor", cascade = CascadeType.ALL)
     private List<Measurement> measurementList;
     public int getId() {
         return id;
