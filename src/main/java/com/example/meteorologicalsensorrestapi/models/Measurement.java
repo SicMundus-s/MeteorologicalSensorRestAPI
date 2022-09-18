@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 // * Реализовать парсер метеорологический данных.
@@ -17,7 +18,6 @@ public class Measurement {
     private int id;
 
     @Column(name = "air_temperature")
-    //@Size(min = -100, max = 100, message = "air template must be in the from -100 between 100 degrees")
     @Min(-100)
     @Max(100)
     @NotNull

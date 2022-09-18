@@ -7,12 +7,11 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/measurement")
@@ -29,12 +28,21 @@ public class MeasurementController {
 
     @PostMapping("/add")
     public ResponseEntity<HttpStatus> addingMeasurementsMade(@RequestBody @Valid MeasurementDTO measurementDTO) {
-        measurementService.save(convertorDTO(measurementDTO));
+        measurementService.save(convertorToMeasurement(measurementDTO));
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    private Measurement convertorDTO(MeasurementDTO measurementDTO) {
+    @GetMapping()
+    public List<MeasurementDTO> showMeasurements() {
+        return measurementService.findAll().stream().map(this::convertorToMeasurementDTO).collect(Collectors.toList());
+    }
+
+    private Measurement convertorToMeasurement(MeasurementDTO measurementDTO) {
         return modelMapper.map(measurementDTO, Measurement.class);
+    }
+
+    private MeasurementDTO convertorToMeasurementDTO(Measurement measurement) {
+        return modelMapper.map(measurement, MeasurementDTO.class);
     }
 
 

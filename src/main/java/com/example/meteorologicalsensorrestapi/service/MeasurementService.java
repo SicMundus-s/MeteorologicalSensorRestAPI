@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
@@ -33,6 +34,10 @@ public class MeasurementService {
 
         enrichMeasurement(measurement);
         measurementRepositories.save(measurement);
+    }
+
+    public List<Measurement> findAll() {
+        return measurementRepositories.findAll();
     }
 
     private void enrichMeasurement(Measurement measurement) {
