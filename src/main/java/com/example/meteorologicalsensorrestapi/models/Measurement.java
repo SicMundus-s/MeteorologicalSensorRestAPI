@@ -1,10 +1,10 @@
 package com.example.meteorologicalsensorrestapi.models;
 
-
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 // * Реализовать парсер метеорологический данных.
 @Entity
@@ -16,8 +16,10 @@ public class Measurement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "air_template")
-    @Size(min = -100, max = 100, message = "air template must be in the from -100 between 100 degrees")
+    @Column(name = "air_temperature")
+    //@Size(min = -100, max = 100, message = "air template must be in the from -100 between 100 degrees")
+    @Min(-100)
+    @Max(100)
     @NotNull
     private double airTemplate;
 
@@ -26,9 +28,8 @@ public class Measurement {
     private boolean raining;
 
     @Column(name = "measurement_date_time")
-    @Temporal(TemporalType.TIMESTAMP)
     @NotNull
-    private Date measurementDateTime;
+    private LocalDateTime measurementDateTime;
 
     @ManyToOne
     @JoinColumn(name = "sensor_id", referencedColumnName = "name")
@@ -38,13 +39,6 @@ public class Measurement {
     public Measurement() {
 
     }
-    public Measurement(int id, double airTemplate, boolean raining, Date measurementDateTime) {
-        this.id = id;
-        this.airTemplate = airTemplate;
-        this.raining = raining;
-        this.measurementDateTime = measurementDateTime;
-    }
-
     public int getId() {
         return id;
     }
@@ -69,11 +63,11 @@ public class Measurement {
         this.raining = raining;
     }
 
-    public Date getMeasurementDateTime() {
+    public LocalDateTime getMeasurementDateTime() {
         return measurementDateTime;
     }
 
-    public void setMeasurementDateTime(Date measurementDateTime) {
+    public void setMeasurementDateTime(LocalDateTime measurementDateTime) {
         this.measurementDateTime = measurementDateTime;
     }
 

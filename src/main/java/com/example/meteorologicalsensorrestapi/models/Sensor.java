@@ -39,6 +39,7 @@ public class Sensor implements Serializable {
         this.name = name;
     }
 
+
     public List<Measurement> getMeasurementList() {
         return measurementList;
     }

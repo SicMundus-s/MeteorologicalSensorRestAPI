@@ -1,12 +1,8 @@
 package com.example.meteorologicalsensorrestapi.dto;
 
-import com.example.meteorologicalsensorrestapi.models.Sensor;
-
-import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 public class MeasurementDTO {
 
@@ -19,7 +15,7 @@ public class MeasurementDTO {
     private boolean raining;
 
     @NotNull
-    private Sensor sensor;
+    private SensorDTO sensor;
 
     public MeasurementDTO() {
 
@@ -41,11 +37,11 @@ public class MeasurementDTO {
         this.raining = raining;
     }
 
-    public Sensor getSensor() {
+    public SensorDTO getSensor() {
         return sensor;
     }
 
-    public void setSensor(Sensor sensor) {
+    public void setSensor(SensorDTO sensor) {
         this.sensor = sensor;
     }
 }
