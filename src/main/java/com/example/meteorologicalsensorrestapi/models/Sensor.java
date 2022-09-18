@@ -23,6 +23,10 @@ public class Sensor implements Serializable {
 
     @OneToMany(mappedBy = "sensor", cascade = CascadeType.ALL)
     private List<Measurement> measurementList;
+
+    public Sensor() {
+
+    }
     public int getId() {
         return id;
     }

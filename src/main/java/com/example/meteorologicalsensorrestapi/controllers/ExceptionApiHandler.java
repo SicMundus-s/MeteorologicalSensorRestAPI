@@ -2,6 +2,7 @@ package com.example.meteorologicalsensorrestapi.controllers;
 
 
 import com.example.meteorologicalsensorrestapi.util.ErrorResponse;
+import com.example.meteorologicalsensorrestapi.util.SensorNotFoundException;
 import com.example.meteorologicalsensorrestapi.util.SensorNotRegistrationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -27,6 +28,16 @@ public class ExceptionApiHandler extends ResponseEntityExceptionHandler {
                 LocalDateTime.now()
         );
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(SensorNotFoundException.class)
+    private ResponseEntity<ErrorResponse> errorFoundSensor(SensorNotFoundException errorMsg) {
+        List<String> errors = Collections.singletonList(errorMsg.getMessage());
+        ErrorResponse response = new ErrorResponse(
+                errors,
+                LocalDateTime.now()
+        );
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 
     @Override

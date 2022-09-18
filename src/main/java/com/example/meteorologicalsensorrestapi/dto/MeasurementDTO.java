@@ -9,7 +9,7 @@ public class MeasurementDTO {
     @Min(-100)
     @Max(100)
     @NotNull
-    private double airTemplate;
+    private double airTemperature;
 
     @NotNull
     private boolean raining;
@@ -21,12 +21,12 @@ public class MeasurementDTO {
 
     }
 
-    public double getAirTemplate() {
-        return airTemplate;
+    public double getAirTemperature() {
+        return airTemperature;
     }
 
-    public void setAirTemplate(double airTemplate) {
-        this.airTemplate = airTemplate;
+    public void setAirTemperature(double airTemperature) {
+        this.airTemperature = airTemperature;
     }
 
     public boolean isRaining() {
