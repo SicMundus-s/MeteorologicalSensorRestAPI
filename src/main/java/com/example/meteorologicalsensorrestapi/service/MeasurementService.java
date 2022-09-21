@@ -40,6 +40,10 @@ public class MeasurementService {
         return measurementRepositories.findAll();
     }
 
+    public long countByRainingIsTrue() {
+       return measurementRepositories.countByRainingIsTrue();
+    }
+
     private void enrichMeasurement(Measurement measurement) {
         measurement.setSensor(sensorService.findByName(measurement.getSensor().getName()).get());
         measurement.setMeasurementDateTime(LocalDateTime.now());

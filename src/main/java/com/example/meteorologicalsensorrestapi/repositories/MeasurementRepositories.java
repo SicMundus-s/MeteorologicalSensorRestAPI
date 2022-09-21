@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MeasurementRepositories extends JpaRepository<Measurement, Integer> {
 
+    long countByRainingIsTrue();
 }

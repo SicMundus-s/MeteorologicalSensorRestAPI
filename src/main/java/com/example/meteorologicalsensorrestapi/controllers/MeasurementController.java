@@ -33,8 +33,13 @@ public class MeasurementController {
     }
 
     @GetMapping()
-    public List<MeasurementDTO> showMeasurements() {
+    public List<MeasurementDTO> FindAll() {
         return measurementService.findAll().stream().map(this::convertorToMeasurementDTO).collect(Collectors.toList());
+    }
+
+    @GetMapping("/rainyDayCount")
+    public long showRainyDayCount() {
+        return measurementService.countByRainingIsTrue();
     }
 
     private Measurement convertorToMeasurement(MeasurementDTO measurementDTO) {
@@ -44,6 +49,5 @@ public class MeasurementController {
     private MeasurementDTO convertorToMeasurementDTO(Measurement measurement) {
         return modelMapper.map(measurement, MeasurementDTO.class);
     }
-
 
 }
