@@ -1,6 +1,7 @@
 package com.example.meteorologicalsensorrestapi.controllers;
 
 import com.example.meteorologicalsensorrestapi.dto.MeasurementDTO;
+import com.example.meteorologicalsensorrestapi.dto.MeasurementsResponse;
 import com.example.meteorologicalsensorrestapi.models.Measurement;
 import com.example.meteorologicalsensorrestapi.service.MeasurementService;
 import org.modelmapper.ModelMapper;
@@ -33,8 +34,8 @@ public class MeasurementController {
     }
 
     @GetMapping()
-    public List<MeasurementDTO> FindAll() {
-        return measurementService.findAll().stream().map(this::convertorToMeasurementDTO).collect(Collectors.toList());
+    public MeasurementsResponse FindAll() {
+        return new MeasurementsResponse(measurementService.findAll().stream().map(this::convertorToMeasurementDTO).collect(Collectors.toList()));
     }
 
     @GetMapping("/rainyDayCount")
