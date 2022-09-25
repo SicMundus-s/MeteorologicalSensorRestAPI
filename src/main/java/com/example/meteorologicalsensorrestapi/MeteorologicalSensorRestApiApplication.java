@@ -13,7 +13,7 @@ public class MeteorologicalSensorRestApiApplication {
     }
 
     @Bean
-    public ModelMapper modelMapper() { // Теперь этот бин находится в контексте спринга
+    public ModelMapper modelMapper() { // bin in the context of spring
         return new ModelMapper();
 
     }

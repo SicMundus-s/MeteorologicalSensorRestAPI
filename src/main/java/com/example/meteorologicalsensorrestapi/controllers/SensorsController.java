@@ -26,11 +26,6 @@ public class SensorsController {
         this.modelMapper = modelMapper;
     }
 
-    /*
-    Возможна реализация через bindingResult, в таком случае нам нужно передать его в аргументе и с помощью стрингБилдера
-    конкатенировать строки из листа ошибок(FieldError) и выкинуть исключение с сообщением ошибки в ПОЛЯХ.
-    Сейчас ошибки с полей ловятся в ExceptionApiHandler таким образом ответственность за обработку ошибки ложится не на контроллер
-     */
     @PostMapping("/registration")
     public ResponseEntity<HttpStatus> registrationSensor(@RequestBody @Valid SensorDTO sensorDTO) {
 
@@ -43,3 +38,4 @@ public class SensorsController {
         return modelMapper.map(sensorDTO, Sensor.class);
     }
 }
+
