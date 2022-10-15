@@ -1,0 +1,22 @@
+CREATE TABLE Sensor(
+    id int primary key GENERATED ALWAYS AS IDENTITY,
+    name varchar(30) UNIQUE NOT NULL
+);
+
+CREATE TABLE Measurement(
+    id int primary key GENERATED ALWAYS AS IDENTITY,
+    air_temperature double precision not null,
+    raining boolean not null DEFAULT false,
+    measurement_date_time timestamp not null,
+    sensor_id varchar REFERENCES Sensor(name)
+);
+
+INSERT INTO Measurement(air_temperature, raining, measurement_date_time, sensor_id)
+VALUES (50.7, true, '2015-12-03 21:54:38', 'gggg');
+
+
+DROP TABLE Sensor;
+DROP TABLE Measurement;
+
+TRUNCATE Sensor CASCADE;
+TRUNCATE Measurement;
